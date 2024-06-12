@@ -16,6 +16,7 @@
 		D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F42C180EC800F80776 /* ContentView.swift */; };
 		D85EF1F72C180ECB00F80776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F62C180ECB00F80776 /* Assets.xcassets */; };
 		D85EF1FA2C180ECB00F80776 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */; };
+		EBEC07372C1970F300BB5794 /* SealevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC07362C1970F300BB5794 /* SealevelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D85EF1F42C180EC800F80776 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D85EF1F62C180ECB00F80776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EBEC07362C1970F300BB5794 /* SealevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SealevelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				1F79C1702C19639E00BF1A2E /* mapview_python */,
 				1AA9CD932C18463C00A9879D /* MapMarker.swift */,
+				EBEC07362C1970F300BB5794 /* SealevelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */,
+				EBEC07372C1970F300BB5794 /* SealevelView.swift in Sources */,
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */,
 				1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */,
