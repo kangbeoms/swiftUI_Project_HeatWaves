@@ -27,6 +27,7 @@ app.config['JSON_AS_ASCII'] = False #for utf8
 template_dir = os.path.abspath(os.path.dirname(__file__))  # 현재 파일의 절대 경로
 env = Environment(loader=FileSystemLoader(template_dir))
 template = env.get_template('jsp/tooltipList.html')
+template_gojsp = env.get_template('jsp/goSwift.jsp')
 
 @app.route("/insert")
 def insert():
@@ -122,17 +123,18 @@ def mapview():
 
     savedata = json.loads(select())
     file_path = os.path.abspath(f"{current_app.root_path}/jsp/tooltipList.html")
+
     with open(file_path, "r", encoding='utf-8') as file:
         html_content = file.read()
 
     for i in savedata:
-        folium.IFrame(html=html_content, width=3500, height=500).add_to(korea_map)
+        folium.IFrame(html=html_content, width=500, height=500).add_to(korea_map)
         html_content = template.render(name= i[0], height= i[3],imagepath=i[0])
 
         folium.Marker(
             [i[1],i[2]],
-            popup=i[0],
-            tooltip=html_content,
+            popup=html_content,
+            tooltip=i[0],
             fill=True,
             lazy=True,
             ).add_to(korea_map)
@@ -186,11 +188,24 @@ def mapview():
     </style>
     """
 
+    # 현재 나의 위치 표시
+    folium.plugins.LocateControl(auto_start=False,setView=False,drawCircle=False).add_to(korea_map)
+
     korea_map.get_root().html.add_child(folium.Element(css))
 
     return korea_map.get_root().render()
 
+# 예측페이지로 이동 루트
+@app.route("/goSwiftfile",methods=['GET','POST'])
+def goswift():
+    name = request.args.get('name')
+    #swift_get = template_gojsp.render(name= name)
+    print("가져온이름",name)
+
+    return {'result' : name}
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)
 
-    
+
