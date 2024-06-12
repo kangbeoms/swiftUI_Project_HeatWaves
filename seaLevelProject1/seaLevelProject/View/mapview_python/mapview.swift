@@ -6,10 +6,29 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct mapview: View {
+    @State var jsonData: [String: Any]? = nil
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        struct WebView: UIViewRepresentable {
+            let url: URL
+
+            func makeUIView(context: Context) -> WKWebView {
+                return WKWebView()
+            }
+
+            func updateUIView(_ uiView: WKWebView, context: Context) {
+                let request = URLRequest(url: url)
+                uiView.load(request)
+            }
+        }
+        return WebView(url: URL(string: "http://127.0.0.1:5000/showmap")!)
+                 .edgesIgnoringSafeArea(.all)
+                 .padding()
+                    
+//        WebView(url: URL(string: "http://127.0.0.1:5000/goSwiftfile?name=\(getsjondata)")!)
+        
     }
 }
 
