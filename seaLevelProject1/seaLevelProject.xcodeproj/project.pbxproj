@@ -11,12 +11,11 @@
 		1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */; };
 		1AA9CD982C1846C400A9879D /* MapMarkerQueryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */; };
 		1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F79C1712C1963B900BF1A2E /* mapview.swift */; };
-		1F79C1752C19640200BF1A2E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1F79C1742C19640200BF1A2E /* Alamofire */; };
+		1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */; };
 		D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */; };
 		D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F42C180EC800F80776 /* ContentView.swift */; };
 		D85EF1F72C180ECB00F80776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F62C180ECB00F80776 /* Assets.xcassets */; };
 		D85EF1FA2C180ECB00F80776 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */; };
-		EBEC07372C1970F300BB5794 /* SealevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC07362C1970F300BB5794 /* SealevelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,12 +23,12 @@
 		1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerModel.swift; sourceTree = "<group>"; };
 		1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerQueryDB.swift; sourceTree = "<group>"; };
 		1F79C1712C1963B900BF1A2E /* mapview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
+		1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		D85EF1EF2C180EC800F80776 /* seaLevelProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seaLevelProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seaLevelProjectApp.swift; sourceTree = "<group>"; };
 		D85EF1F42C180EC800F80776 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D85EF1F62C180ECB00F80776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EBEC07362C1970F300BB5794 /* SealevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SealevelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F79C1752C19640200BF1A2E /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +55,6 @@
 			children = (
 				1F79C1702C19639E00BF1A2E /* mapview_python */,
 				1AA9CD932C18463C00A9879D /* MapMarker.swift */,
-				EBEC07362C1970F300BB5794 /* SealevelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -73,6 +70,7 @@
 		1AA9CD912C18460200A9879D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FA69B9C2C1A812E005E4ED0 /* python_server */,
 				1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */,
 			);
 			path = Model;
@@ -84,6 +82,14 @@
 				1F79C1712C1963B900BF1A2E /* mapview.swift */,
 			);
 			path = mapview_python;
+			sourceTree = "<group>";
+		};
+		1FA69B9C2C1A812E005E4ED0 /* python_server */ = {
+			isa = PBXGroup;
+			children = (
+				1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */,
+			);
+			path = python_server;
 			sourceTree = "<group>";
 		};
 		D85EF1E62C180EC800F80776 = {
@@ -141,7 +147,6 @@
 			);
 			name = seaLevelProject;
 			packageProductDependencies = (
-				1F79C1742C19640200BF1A2E /* Alamofire */,
 			);
 			productName = seaLevelProject;
 			productReference = D85EF1EF2C180EC800F80776 /* seaLevelProject.app */;
@@ -172,7 +177,6 @@
 			);
 			mainGroup = D85EF1E62C180EC800F80776;
 			packageReferences = (
-				1F79C1732C19640200BF1A2E /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = D85EF1F02C180EC800F80776 /* Products */;
 			projectDirPath = "";
@@ -201,7 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */,
-				EBEC07372C1970F300BB5794 /* SealevelView.swift in Sources */,
+				1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */,
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */,
 				1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */,
@@ -414,25 +418,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		1F79C1732C19640200BF1A2E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1F79C1742C19640200BF1A2E /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1F79C1732C19640200BF1A2E /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D85EF1E72C180EC800F80776 /* Project object */;
 }
