@@ -9,7 +9,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         //SealevelView()
-        mapview()
+//        mapview()
+        python_to_swift()
     }
 }
 struct ContentView_Previews: PreviewProvider {

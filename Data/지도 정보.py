@@ -176,7 +176,7 @@ def goswift():
     # response = jsonify({'result': name})
     # response.headers.add('Content-Type', 'application/json; charset=utf-8')
 
-    return json.dumps(rows, ensure_ascii=False).encode('utf8')
+    return {"result" : rows}
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)
