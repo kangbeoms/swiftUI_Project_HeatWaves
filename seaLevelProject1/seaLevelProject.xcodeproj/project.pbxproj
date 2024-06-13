@@ -12,6 +12,10 @@
 		1AA9CD982C1846C400A9879D /* MapMarkerQueryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */; };
 		1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F79C1712C1963B900BF1A2E /* mapview.swift */; };
 		1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */; };
+		D83A9DCD2C1ABEE0003E7898 /* SeaLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */; };
+		D83A9DCF2C1AC040003E7898 /* SeaLevelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */; };
+		D83A9DD12C1AC0BB003E7898 /* SeaLevelShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */; };
+		D83A9DD32C1AC104003E7898 /* YAxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DD22C1AC104003E7898 /* YAxisView.swift */; };
 		D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */; };
 		D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F42C180EC800F80776 /* ContentView.swift */; };
 		D85EF1F72C180ECB00F80776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F62C180ECB00F80776 /* Assets.xcassets */; };
@@ -24,6 +28,10 @@
 		1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerQueryDB.swift; sourceTree = "<group>"; };
 		1F79C1712C1963B900BF1A2E /* mapview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
+		D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelModel.swift; sourceTree = "<group>"; };
+		D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelContentView.swift; sourceTree = "<group>"; };
+		D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelShapeView.swift; sourceTree = "<group>"; };
+		D83A9DD22C1AC104003E7898 /* YAxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisView.swift; sourceTree = "<group>"; };
 		D85EF1EF2C180EC800F80776 /* seaLevelProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seaLevelProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seaLevelProjectApp.swift; sourceTree = "<group>"; };
 		D85EF1F42C180EC800F80776 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,7 +53,6 @@
 		1AA9CD8E2C1845EA00A9879D /* test */ = {
 			isa = PBXGroup;
 			children = (
-				D85EF1F42C180EC800F80776 /* ContentView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -55,6 +62,9 @@
 			children = (
 				1F79C1702C19639E00BF1A2E /* mapview_python */,
 				1AA9CD932C18463C00A9879D /* MapMarker.swift */,
+				D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */,
+				D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */,
+				D83A9DD22C1AC104003E7898 /* YAxisView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -72,6 +82,7 @@
 			children = (
 				1FA69B9C2C1A812E005E4ED0 /* python_server */,
 				1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */,
+				D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,6 +127,7 @@
 				1AA9CD8F2C1845F600A9879D /* View */,
 				1AA9CD8E2C1845EA00A9879D /* test */,
 				D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */,
+				D85EF1F42C180EC800F80776 /* ContentView.swift */,
 				D85EF1F62C180ECB00F80776 /* Assets.xcassets */,
 				D85EF1F82C180ECB00F80776 /* Preview Content */,
 			);
@@ -204,7 +216,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83A9DCF2C1AC040003E7898 /* SeaLevelContentView.swift in Sources */,
+				D83A9DCD2C1ABEE0003E7898 /* SeaLevelModel.swift in Sources */,
 				1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */,
+				D83A9DD32C1AC104003E7898 /* YAxisView.swift in Sources */,
+				D83A9DD12C1AC0BB003E7898 /* SeaLevelShapeView.swift in Sources */,
 				1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */,
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */,
