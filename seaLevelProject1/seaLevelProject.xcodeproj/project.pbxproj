@@ -11,6 +11,7 @@
 		1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */; };
 		1AA9CD982C1846C400A9879D /* MapMarkerQueryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */; };
 		1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F79C1712C1963B900BF1A2E /* mapview.swift */; };
+		1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */; };
 		D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */; };
 		D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F42C180EC800F80776 /* ContentView.swift */; };
 		D85EF1F72C180ECB00F80776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F62C180ECB00F80776 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerModel.swift; sourceTree = "<group>"; };
 		1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerQueryDB.swift; sourceTree = "<group>"; };
 		1F79C1712C1963B900BF1A2E /* mapview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
+		1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		D85EF1EF2C180EC800F80776 /* seaLevelProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seaLevelProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85EF1F22C180EC800F80776 /* seaLevelProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seaLevelProjectApp.swift; sourceTree = "<group>"; };
 		D85EF1F42C180EC800F80776 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		1AA9CD912C18460200A9879D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FA69B9C2C1A812E005E4ED0 /* python_server */,
 				1AA9CD952C1846A100A9879D /* MapMarkerModel.swift */,
 			);
 			path = Model;
@@ -79,6 +82,14 @@
 				1F79C1712C1963B900BF1A2E /* mapview.swift */,
 			);
 			path = mapview_python;
+			sourceTree = "<group>";
+		};
+		1FA69B9C2C1A812E005E4ED0 /* python_server */ = {
+			isa = PBXGroup;
+			children = (
+				1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */,
+			);
+			path = python_server;
 			sourceTree = "<group>";
 		};
 		D85EF1E62C180EC800F80776 = {
@@ -194,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */,
+				1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */,
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */,
 				1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */,
