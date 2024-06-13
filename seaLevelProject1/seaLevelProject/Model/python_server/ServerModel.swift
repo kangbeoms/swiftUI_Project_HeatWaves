@@ -7,17 +7,12 @@
 
 import Foundation
 
-struct Response: Codable {
-  var results: [readData]
-}
+struct MapPoint: Codable {
 
-struct readData: Codable{
-    var imageurl: String
-    var name: String
-    
-    init(imageurl: String, name: String) {
-        self.imageurl = imageurl
-        self.name = name
-    }
+    var landname: String
+    var latitude: String
+    var longitude: String
+    var level: String
+    var height: String
     
 }
