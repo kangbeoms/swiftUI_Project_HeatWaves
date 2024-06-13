@@ -27,7 +27,7 @@ struct MapMarker: View {
         }.onAppear(perform: {
             let query = MapMarkerQueryDB()
             Task {
-              mapinfo = try await query.loadJsonData(url:"http://localhost:8080/swiftUI/JSP/swift_sealevel_query.jsp")
+              mapinfo = try await query.loadJsonData(url:"http://localhost:8080/swiftUI/JSP/select_query.jsp")
                 for item in mapinfo {
                     print("건물이름 : \(item.name) \nlat :\(item.lat)\nlng:\(item.lng)")
                 }
