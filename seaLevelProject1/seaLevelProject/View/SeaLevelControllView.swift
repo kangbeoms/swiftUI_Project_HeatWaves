@@ -75,7 +75,6 @@ extension SeaLevelControllView {
                 Spacer()
             }
         }
-    }
     }//setControl
     
     private var controlLabelSection: some View{
