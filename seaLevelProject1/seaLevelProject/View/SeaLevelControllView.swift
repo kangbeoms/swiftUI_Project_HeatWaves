@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SeaLevelControllView: View {
-//    @State private var seaLevel: CGFloat = 0 // 해수면 높이 초기값
-//
-//    @State var firstNum = ""
-//    @State var secondNum = ""
+    @State private var seaLevel: CGFloat = 0 // 해수면 높이 초기값
+
+    @State var firstNum = ""
+    @State var secondNum = ""
     
     var body: some View {
         VStack (spacing: 16){
@@ -75,7 +75,6 @@ extension SeaLevelControllView {
                 Spacer()
             }
         }
-    }
     }//setControl
     
     private var controlLabelSection: some View{
