@@ -35,22 +35,15 @@
             font-size: 14px;
             color: #555;
         }
-
-        /* .submit-button {
-            width: 100px; 
-            padding: 10px; 
-        } */
     </style>
 </head>
 <body>
     <form action="/goSwiftfile" method="get" class="tooltip-content">
-
         <h2>{{ name }}</h2>
         <img src="http://127.0.0.1:5000/static/images/{{imagepath}}.jpg"/> 
-        <p>건물 높이: {{ height }} m</p>
-            <input type="hidden" name="name" value="{{ name }}">
-            <input type="submit" value="해수면 추세 예측하기." class="submit-button">
-
-        </form>
+        <div><p>높이: {{ height }} m</p></div>
+        <input type="submit" value="해수면 예측하기"/>
+        <input type="hidden" name="name" value="{{ name }}">
+    </form>
 </body>
 </html>
