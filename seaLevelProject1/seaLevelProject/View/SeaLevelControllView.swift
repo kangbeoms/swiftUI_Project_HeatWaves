@@ -7,19 +7,24 @@
 
 import SwiftUI
 
-struct SeaLevelControllView: View {
+struct SeaLevelControllView: View {    
+//    @EnvironmentObject private var vm: FeaturesViewModel
     @State private var seaLevel: CGFloat = 0 // 해수면 높이 초기값
-
-    @State var firstNum = ""
-    @State var secondNum = ""
+    @State private var co2Val: CGFloat = 0.0
+    @State private var popVal: CGFloat = 0.0
+    @State private var thicVal: CGFloat = 0.0
+    @State private var thicMeanVal: CGFloat = 0.0
+    @State private var seaMeanTempVal: CGFloat = 0.0
+    @State private var seaSurMeanTempVal: CGFloat = 0.0
+    @State private var earthTempMeanVal: CGFloat = 0.0
     
     var body: some View {
         VStack (spacing: 16){
             Spacer()
             chartSection
             Spacer()
-            controlSection
-            Spacer()
+//            controlSection
+//            Spacer()
             
         }//VStack
     }
@@ -58,13 +63,10 @@ extension SeaLevelControllView {
     
     // 해수면에 영향을 미치는 요소들을 조정하는 부분
     private var controlSection: some View{
-        
-//        ForEach(numList){
-            setControl
-//        }
+        showCo2ControllerView
+
     }
-    
-    private var setControl: some View {
+    private var showCo2ControllerView: some View {
         VStack {    // title
             controlLabelSection
             HStack {    // Control Button
@@ -83,7 +85,7 @@ extension SeaLevelControllView {
     }//controlLabelSection
     
     private var tfAmount: some View{
-        TextField("0", text: $secondNum)
+        TextField(0, text: String($co2Val))
             .textFieldStyle(.roundedBorder)
             .frame(width: 50)
             .multilineTextAlignment(.trailing)

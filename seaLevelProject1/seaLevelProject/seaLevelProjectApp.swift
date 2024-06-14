@@ -9,8 +9,13 @@ import SwiftUI
 
 @main
 struct seaLevelProjectApp: App {
+    
+//    @StateObject private var vm = FeaturesViewModel()
+    
     var body: some Scene {
         WindowGroup {
+//            FeaturesView()
+//                .environmentObject(vm)
             ContentView()
         }
     }

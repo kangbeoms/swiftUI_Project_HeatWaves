@@ -9,6 +9,11 @@ import Foundation
 
 struct FeatureDataModel: Identifiable{
 //    let id = UUID().uuidString
+    let feature: String
     let label: String
     let amount: Double
+    
+    var id: String{
+        feature
+    }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 class FeatureDataService {
-    static let features: [FeatureDataModel] = [
+    static let featureDataModels: [FeatureDataModel] = [
         FeatureDataModel(
-            feature: "co2",
+            feature: "Co2",
             label: "Co2 (단위:mt 메가톤",
             amount: 10),
         FeatureDataModel(

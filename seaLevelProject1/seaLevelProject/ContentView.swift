@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     var body: some View {
         SeaLevelContentView()
 //        MapMarker()
-//        ZStack(content: {
-//            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
-//        })
     }
 }
 
