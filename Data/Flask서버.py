@@ -37,7 +37,11 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+from selenium.webdriver.common.action_chains import ActionChains
 
+import urllib.request as req
+# 크롤링 시 시간 텀 주기
+import time
 
 # 플라스크 서버 지정
 app = Flask(__name__)
@@ -185,11 +189,10 @@ def goswift():
     conn.close()
     curs.close()
 
-
     return {"result" : name}
 
 
-@app.before_first_request
+@app.route("/getnews")
 def startup():
 
     conn = pymysql.connect(
@@ -242,6 +245,63 @@ def startup():
             conn.rollback()  # 롤백 수행
             conn.close()
             curs.close()
+    return "ok"
+
+@app.route("/getyou")
+def goyou():
+    chrome_options = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver.get("https://www.youtube.com/results?search_query=해수면")
+
+
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+
+    # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    # 전에있던 리스트 삭제
+    sql = "delete from youtubevidio"
+    curs.execute(sql)
+    conn.commit()
+
+    youlink = []
+    youimage = []
+
+    try:
+        for i in range(1,5):
+            if i == 4:
+                driver.execute_script("window.scrollBy(0, 600);")
+                time.sleep(1)  
+
+            video_renderer = driver.find_element(By.XPATH, f"(//ytd-video-renderer)[{i}]")
+            yes = video_renderer.find_element(By.CSS_SELECTOR, "a#thumbnail yt-image img")
+            no = video_renderer.find_element(By.CSS_SELECTOR, "a#thumbnail")
+            youimage.append(yes.get_attribute('src'))
+            youlink.append(no.get_attribute('href'))
+        for n in range(4):
+            # sql 문장
+            print("넣을 이미지 이름" ,youimage[n])
+            sql = "insert into youtubevidio (link,image) values (%s,%s)"
+            curs.execute(sql,(youlink[n],youimage[n]))
+                    
+            conn.commit()
+
+        curs.close()
+        conn.close()
+    except Exception as e:
+        print(f"에러 발생: {e}")
+        if 'conn' in locals():
+            conn.rollback()  # 롤백 수행
+            conn.close()
+            curs.close()
+    driver.quit()
+    return " ok"
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)
