@@ -144,10 +144,8 @@ def mapview():
         style_function=style_function
     ).add_to(korea_map)
 
-
     # 모바일 환경과 맞지않아 사용안함
     MousePosition().add_to(korea_map)
-
 
     return korea_map.get_root().render()
 
@@ -171,12 +169,13 @@ def goswift():
     # sql 문장
     sql = "select * from mappoint where landname=%s"
     curs.execute(sql,(name))
-    rows = curs.fetchall()
+    curs.fetchall()
 
     conn.close()
     curs.close()
 
-    return {"result" : rows}
+
+    return {"result" : name}
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)
