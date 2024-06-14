@@ -2,7 +2,9 @@
 """
 저자:
 설명: 1.database에 있는 랜드마크 이름,위도,경도,해발고도,건물 높이를 불러온다.
-     2.제작한 선형회귀모델을 사용 get요청으로 예측값을 보낸다.
+     2.제작한 선형회귀모델을 사용 get요청으로받은 파라메터로 예측값을 보낸다.
+     3.크롤링후 데이터를 디비에 넣는다.
+     4.폴리움 지도를 서버에 추가한다.
 """
 
 # 파이썬 서버 구동
@@ -31,15 +33,12 @@ from jinja2 import Environment, FileSystemLoader
 # 데이터프레임 생성
 import pandas as pd
 
-
+# 셀레니움 사용
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
-from selenium.webdriver.common.action_chains import ActionChains
 
-import urllib.request as req
 # 크롤링 시 시간 텀 주기
 import time
 
@@ -53,20 +52,19 @@ template_dir = os.path.abspath(os.path.dirname(__file__))  # 현재 파일의 �
 env = Environment(loader=FileSystemLoader(template_dir))
 template = env.get_template('jsp/tooltipList.html')
 
-# 지도에 마커를 표시하기 위한 데이터베이스 진입
-@app.route("/select")
-def select():
     # MySql Connection
-    conn = pymysql.connect(
+conn = pymysql.connect(
         host='127.0.0.1',
         user='root',
         password='qwer1234',
         db='sealevel',
         charset='utf8'
     )
-
     # Connection으로부터 Cursor 생성
-    curs = conn.cursor()
+curs = conn.cursor()
+# 지도에 마커를 표시하기 위한 데이터베이스 진입
+@app.route("/select")
+def select():
 
     # sql 문장
     sql = "select * from mappoint"
@@ -169,18 +167,6 @@ def goswift():
 
     name = request.args.get('name')
 
-    # MySql Connection
-    conn = pymysql.connect(
-        host='127.0.0.1',
-        user='root',
-        password='qwer1234',
-        db='sealevel',
-        charset='utf8'
-    )
-
-    # Connection으로부터 Cursor 생성
-    curs = conn.cursor()
-
     # sql 문장
     sql = "select * from mappoint where landname=%s"
     curs.execute(sql,(name))
@@ -195,23 +181,13 @@ def goswift():
 @app.route("/getnews")
 def startup():
 
-    conn = pymysql.connect(
-        host='127.0.0.1',
-        user='root',
-        password='qwer1234',
-        db='sealevel',
-        charset='utf8'
-    )
-    print("스타트스탙트")
-    # Connection으로부터 Cursor 생성
-    curs = conn.cursor()
-
     # 전에있던 리스트 삭제
     sql = "delete from navernews"
     curs.execute(sql)
     conn.commit()
 
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get("https://news.naver.com/breakingnews/section/103/248")
     title = []
@@ -250,20 +226,9 @@ def startup():
 @app.route("/getyou")
 def goyou():
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get("https://www.youtube.com/results?search_query=해수면")
-
-
-    conn = pymysql.connect(
-            host='127.0.0.1',
-            user='root',
-            password='qwer1234',
-            db='sealevel',
-            charset='utf8'
-        )
-
-    # Connection으로부터 Cursor 생성
-    curs = conn.cursor()
 
     # 전에있던 리스트 삭제
     sql = "delete from youtubevidio"
