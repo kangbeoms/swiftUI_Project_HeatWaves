@@ -174,7 +174,6 @@ def goswift():
     conn.close()
     curs.close()
 
-
     return {"result" : name}
 
 if __name__ == "__main__":
