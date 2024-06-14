@@ -2,7 +2,6 @@ import SwiftUI
 import WebKit
 
 struct mapview: View {
-    @State private var jsonData = [readData]()
     @State private var isLoading: Bool = true
 
     

@@ -4,6 +4,7 @@
 설명: 1.database에 있는 랜드마크 이름,위도,경도,해발고도,건물 높이를 불러온다.
      2.제작한 선형회귀모델을 사용 get요청으로 예측값을 보낸다.
 """
+
 # 파이썬 서버 구동
 from flask import Flask, jsonify, render_template, request,current_app
 # json으로 데이터 송신
@@ -88,7 +89,7 @@ def sea():
 # 서버 테스트용
 @app.route("/test")
 def iris2():
-    #print(os.getcwd())
+
     return '<h1>테스트 서버</h1><br><h2>테스트 서버</h2>'
 
 # 지도 보여주기
@@ -101,7 +102,7 @@ def mapview():
     zoom_start= 7,
     
     )
-    #korea_map.fit_bounds([[33, 124.0], [38.6, 131.9]])
+
     korea_map.zoom_start = 7
     savedata = json.loads(select())
 
@@ -120,7 +121,7 @@ def mapview():
         folium.Marker(
             [i[1],i[2]],
             popup=html_content,
-            tooltip=i[0],
+            #tooltip=i[0],
             fill=True,
             lazy=True,
             ).add_to(korea_map)
@@ -143,10 +144,8 @@ def mapview():
         style_function=style_function
     ).add_to(korea_map)
 
-
     # 모바일 환경과 맞지않아 사용안함
     MousePosition().add_to(korea_map)
-
 
     return korea_map.get_root().render()
 
@@ -170,17 +169,14 @@ def goswift():
     # sql 문장
     sql = "select * from mappoint where landname=%s"
     curs.execute(sql,(name))
-    rows = curs.fetchall()
+    curs.fetchall()
+
     conn.close()
+    curs.close()
 
-    # response = jsonify({'result': name})
-    # response.headers.add('Content-Type', 'application/json; charset=utf-8')
 
-<<<<<<< Updated upstream
-    return {"result" : rows}
-=======
-    return json.dumps(rows, ensure_ascii=False).encode('utf8')
->>>>>>> Stashed changes
+    return {"result" : name}
+
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)
