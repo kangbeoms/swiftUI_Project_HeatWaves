@@ -87,7 +87,7 @@ struct MapMarker: View {
                             .font(.system(size: 13))
                             .foregroundColor(.white)
                             .padding()
-                            .background(Color.red)
+                            .background(Color(red: 0.2, green: 0.5, blue: 0.8))
                             .cornerRadius(20)
                             
                             Spacer().frame(height: 35)
@@ -100,7 +100,7 @@ struct MapMarker: View {
                             .frame(height: 50)
                             .foregroundColor(.white)
                             .padding()
-                            .background(Color.gray)
+                            .background(Color(red: 0.0, green: 0.8, blue: 0.8))
                             .cornerRadius(20)
                         }
                         .padding()
@@ -108,7 +108,7 @@ struct MapMarker: View {
                     .padding(20)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.ultraThinMaterial)
+                            .fill(Color(red: 0.95, green: 0.93, blue: 0.88))
                             .offset(y: 65)
                     )
                     .cornerRadius(20)
@@ -281,7 +281,7 @@ extension MapMarker {
                 .listStyle(PlainListStyle())
             }
         }
-        .background(.thinMaterial)
+        .background(Color(red: 0.95, green: 0.93, blue: 0.88))
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 15)
     }
