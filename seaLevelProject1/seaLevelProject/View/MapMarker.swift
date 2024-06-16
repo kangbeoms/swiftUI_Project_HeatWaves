@@ -15,7 +15,7 @@ struct MapMarker: View {
     @State var titleText: String = "전체보기"
     
     @State var mapinfo: [MapMarkerModel] = []
-    
+
     @State var markerLat: String = ""
     @State var markerLng: String = ""
     

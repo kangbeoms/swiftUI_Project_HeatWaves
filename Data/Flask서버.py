@@ -6,7 +6,7 @@
      3.크롤링후 데이터를 디비에 넣는다.
      4.폴리움 지도를 서버에 추가한다.
 """
-
+#MARK:import 모음
 # 파이썬 서버 구동
 from flask import Flask, jsonify, render_template, request,current_app
 # json으로 데이터 송신
@@ -42,6 +42,8 @@ from selenium.webdriver.common.by import By
 # 크롤링 시 시간 텀 주기
 import time
 
+import numpy as np
+#MARK:Flask 서버 시작 설정
 # 플라스크 서버 지정
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False #for utf8
@@ -51,7 +53,7 @@ template_dir = os.path.abspath(os.path.dirname(__file__))  # 현재 파일의 �
 # html에 파라미터를 주기위해 jinja2 라이브러리 사용
 env = Environment(loader=FileSystemLoader(template_dir))
 template = env.get_template('jsp/tooltipList.html')
-
+#MARK: MYSQL 서버 설정
     # MySql Connection
 conn = pymysql.connect(
         host='127.0.0.1',
@@ -62,6 +64,7 @@ conn = pymysql.connect(
     )
     # Connection으로부터 Cursor 생성
 curs = conn.cursor()
+#MARK: 폴리움 맵 마커 DB SELECT
 # 지도에 마커를 표시하기 위한 데이터베이스 진입
 @app.route("/select")
 def select():
@@ -76,6 +79,7 @@ def select():
 
     return result
 
+#MARK: 해수면 예측값 회귀모델 전송
 # 선형회귀모델 예측값 보내기
 @app.route('/getpred')
 def sea():
@@ -98,13 +102,13 @@ def sea():
 
     pre_int = list(map(int, pre))
     return {'result' : pre_int}
-
+#MARK: 서버 테스트
 # 서버 테스트용
 @app.route("/test")
 def iris2():
 
     return '<h1>테스트 서버</h1><br><h2>테스트 서버</h2>'
-
+#MARK: 폴리움 지도 설정
 # 지도 보여주기
 @app.route("/showmap",methods=['GET','POST'])
 def mapview():
@@ -162,6 +166,7 @@ def mapview():
 
     return korea_map.get_root().render()
 
+#MARK: 지도 마커 클릭시 값 보내기
 @app.route("/goSwiftfile",methods=['GET','POST'])
 def goswift():
 
@@ -177,7 +182,7 @@ def goswift():
 
     return {"result" : name}
 
-
+#MARK: 네이버 뉴스 크롤링,DB INSERT
 @app.route("/getnews")
 def startup():
 
@@ -213,6 +218,11 @@ def startup():
             curs.execute(sql,(title[j],publish[j],image[j],link[j]))
             conn.commit()
 
+        sel = "select * from navernews"
+        curs.execute(sel)
+        conn.commit()
+        res = curs.fetchall()
+
         conn.close()
         curs.close()
     except Exception as e:
@@ -221,8 +231,20 @@ def startup():
             conn.rollback()  # 롤백 수행
             conn.close()
             curs.close()
-    return "ok"
 
+    data_list = []
+    for row in res:
+        data_dict = {
+            'title': row[0],
+            'publish': row[1],
+            'image': row[2],
+            'link': row[3]
+        }
+        data_list.append(data_dict)
+    
+    return json.dumps(data_list, ensure_ascii=False).encode('utf8')
+
+#MARK: 유튜브 크롤링,DB INSERT
 @app.route("/getyou")
 def goyou():
     chrome_options = webdriver.ChromeOptions()
