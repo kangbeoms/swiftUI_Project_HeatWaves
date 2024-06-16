@@ -16,6 +16,7 @@ struct MapMarkerModel: Decodable{
     var height: String
     var location: String
     
+    
     init(name: String, lat: String, lng: String, sealevel: String, height: String, location: String){
         self.name = name
         self.lat = lat
@@ -23,7 +24,6 @@ struct MapMarkerModel: Decodable{
         self.sealevel = sealevel
         self.height = height
         self.location = location
-        
     }
     
 }
