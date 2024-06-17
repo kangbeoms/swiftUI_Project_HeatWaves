@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-//        Text("dsa")
-        SeaLevelListView(data: SeaLevelListModel(label: "1", unit: "2", value: 1,minValue: 0, maxValue: 100))
+        MainView()
+//        TabView {
+//            SeaLevelPredictionView()
+//                .tabItem {
+//                    Label("SeaLevel1", systemImage: "house")
+//                }
+//
+//            AdjustableSeaLevelView()
+//                .tabItem {
+//                    Label("SeaLevel2", systemImage: "person.3.fill")
+//                }
+//        }
     }
 }
-
 
 
 struct ContentView_Previews: PreviewProvider {

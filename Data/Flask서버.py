@@ -44,6 +44,10 @@ from selenium.webdriver.common.by import By
 import time
 
 import numpy as np
+
+from folium.elements import *
+from folium.utilities import JsCode
+from folium.plugins import Realtime
 #MARK:Flask 서버 시작 설정
 # 플라스크 서버 지정
 app = Flask(__name__)
@@ -134,6 +138,26 @@ def mapview():
     korea_map.zoom_start = 7
     savedata = json.loads(select())
 
+    my_js = """
+    $(document).ready(function() {
+        $('#gogogo').click(function() {
+           var input = document.getElementById('name');
+            alert('버튼이 클릭되었습니다.',input);
+            
+        });
+    });  
+"""
+    getitem = JsCode("""$(document).ready(function() {
+        $('#gogogo').click(function() {
+           var input = document.getElementById('name');
+            alert('버튼이 클릭되었습니다.',input);
+            
+        });
+    }); """)
+   
+    
+  
+    #korea_map.get_root().html.add_child(folium.JavascriptLink(f'/{current_app.root_path}/jsp/func.js'))
     # html파일 읽어오기
     file_path = os.path.abspath(f"{current_app.root_path}/jsp/tooltipList.html")
     with open(file_path, "r", encoding='utf-8') as file:
@@ -153,6 +177,8 @@ def mapview():
             fill=True,
             lazy=True,
             ).add_to(korea_map)
+    
+    #marker.popup.add_child(getitem)
 
     # GeoJSON 파일 열기
     with open(f"{current_app.root_path}/json/korea_map.json", "r") as f:
@@ -174,8 +200,9 @@ def mapview():
 
     # 모바일 환경과 맞지않아 사용안함
     MousePosition().add_to(korea_map)
-
+    korea_map.get_root().script.add_child(Element(my_js))
     return korea_map.get_root().render()
+#korea_map._repr_html_()korea_map.get_root().render()
 
 #MARK: 지도 마커 클릭시 값 보내기
 @app.route("/goSwiftfile",methods=['GET','POST'])
