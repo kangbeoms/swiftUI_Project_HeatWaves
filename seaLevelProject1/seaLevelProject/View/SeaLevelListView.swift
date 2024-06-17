@@ -5,8 +5,6 @@
 //  Created by 김수진 on 6/18/24.
 //
 
-import SwiftUI
-
 struct SeaLevelListView: View {
     @ObservedObject var dataFetcher = DataFetcher()
     
