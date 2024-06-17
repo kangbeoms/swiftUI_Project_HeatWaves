@@ -28,8 +28,8 @@
 		D85EF1FA2C180ECB00F80776 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */; };
 		EB983DFD2C1B348B00ED8822 /* SeaLevelControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB983DFC2C1B348B00ED8822 /* SeaLevelControllView.swift */; };
 		EBF133FB2C20B384007175FC /* SeaLevelControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FA2C20B384007175FC /* SeaLevelControllerModel.swift */; };
-		EBF133FD2C20B3CA007175FC /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FC2C20B3CA007175FC /* DataFetcher.swift */; };
 		EBF133FF2C20B3FF007175FC /* SeaLevelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */; };
+		EBF134012C20B56C007175FC /* SeaLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF134002C20B56C007175FC /* SeaLevelViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,8 +53,8 @@
 		D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB983DFC2C1B348B00ED8822 /* SeaLevelControllView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaLevelControllView.swift; sourceTree = "<group>"; };
 		EBF133FA2C20B384007175FC /* SeaLevelControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelControllerModel.swift; sourceTree = "<group>"; };
-		EBF133FC2C20B3CA007175FC /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelListView.swift; sourceTree = "<group>"; };
+		EBF134002C20B56C007175FC /* SeaLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,6 @@
 				D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */,
 				D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */,
 				D83A9DD22C1AC104003E7898 /* YAxisView.swift */,
-				EBF133FC2C20B3CA007175FC /* DataFetcher.swift */,
 				EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */,
 			);
 			path = View;
@@ -91,6 +90,7 @@
 			children = (
 				1FB641BC2C1FD277001F6440 /* python_server */,
 				1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */,
+				EBF134002C20B56C007175FC /* SeaLevelViewModel.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -271,8 +271,8 @@
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				1FB641BE2C1FD298001F6440 /* python_getJSON.swift in Sources */,
 				D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */,
+				EBF134012C20B56C007175FC /* SeaLevelViewModel.swift in Sources */,
 				1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */,
-				EBF133FD2C20B3CA007175FC /* DataFetcher.swift in Sources */,
 				1AA9CD982C1846C400A9879D /* MapMarkerQueryDB.swift in Sources */,
 				1AA9CD942C18463C00A9879D /* MapMarker.swift in Sources */,
 			);

@@ -1,13 +1,14 @@
 //
-//  Datafecther.swift
+//  DataFetcher.swift
 //  seaLevelProject
 //
 //  Created by 김수진 on 6/18/24.
 //
-import SwiftUI
+
+import Foundation
 import Combine
 
-class DataFetcher: ObservableObject {
+class SeaLevelViewModel: ObservableObject {
     @Published var seaLevelData: [SeaLevelControllerModel] = []
 
     func fetchData() {

@@ -4,20 +4,21 @@
 //
 //  Created by 김수진 on 6/18/24.
 //
+import SwiftUI
 
 struct SeaLevelListView: View {
-    @ObservedObject var dataFetcher = DataFetcher()
+    @ObservedObject var viewModel = SeaLevelViewModel()
     
     var body: some View {
         VStack {
-            if dataFetcher.seaLevelData.isEmpty {
+            if viewModel.seaLevelData.isEmpty {
                 Text("Loading data...")
                     .onAppear {
-                        dataFetcher.fetchData()
+                        viewModel.fetchData()
                     }
             } else {
                 List {
-                    ForEach(dataFetcher.seaLevelData) { item in
+                    ForEach(viewModel.seaLevelData) { item in
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(item.label)
