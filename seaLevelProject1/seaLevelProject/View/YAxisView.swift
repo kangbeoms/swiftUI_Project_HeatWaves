@@ -10,7 +10,7 @@ import SwiftUI
 struct YAxisView: View {
     var body: some View {
         GeometryReader { geometry in
-            ForEach(0..<701) { index in
+            ForEach(0..<501) { index in
                 if index % 10 == 0 {
                     Text("\(index)cm")
                         .font(.caption)
@@ -20,3 +20,4 @@ struct YAxisView: View {
         }
     }
 }
+
