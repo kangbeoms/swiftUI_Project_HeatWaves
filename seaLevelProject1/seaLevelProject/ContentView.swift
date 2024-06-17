@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        StepperView()
+//        Text("dsa")
+        SeaLevelListView(data: SeaLevelListModel(label: "1", unit: "2", value: 1,minValue: 0, maxValue: 100))
     }
 }
 
