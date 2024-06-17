@@ -11,7 +11,7 @@ struct ContentView: View {
     
     var body: some View {
         //SeaLevelContentView()
-        MapMarker()
+        MainView()
         //mapview()
 //        ZStack(content: {
 //            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
