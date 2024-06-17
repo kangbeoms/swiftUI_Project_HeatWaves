@@ -21,11 +21,7 @@ struct mapview: View {
                 .cornerRadius(10)
                 .padding()
             }
-//            HStack(content: {
-//                List(content: {
-//                    
-//                })
-//            })
+
         }
     }
 }
