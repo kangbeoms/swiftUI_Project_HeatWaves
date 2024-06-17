@@ -2,9 +2,11 @@
 """
 저자:
 설명: 1.database에 있는 랜드마크 이름,위도,경도,해발고도,건물 높이를 불러온다.
-     2.제작한 선형회귀모델을 사용 get요청으로 예측값을 보낸다.
+     2.제작한 선형회귀모델을 사용 get요청으로받은 파라메터로 예측값을 보낸다.
+     3.크롤링후 데이터를 디비에 넣는다.
+     4.폴리움 지도를 서버에 추가한다.
 """
-
+#MARK:import 모음
 # 파이썬 서버 구동
 from flask import Flask, jsonify, render_template, request,current_app
 # json으로 데이터 송신
@@ -12,6 +14,7 @@ import json
 import joblib
 # sql 접근
 import pymysql
+from sqlalchemy import create_engine
 # 파이썬 맵 사용
 import folium
 # json파일 불러오기
@@ -31,18 +34,17 @@ from jinja2 import Environment, FileSystemLoader
 # 데이터프레임 생성
 import pandas as pd
 
-
+# 셀레니움 사용
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
-from selenium.webdriver.common.action_chains import ActionChains
 
-import urllib.request as req
 # 크롤링 시 시간 텀 주기
 import time
 
+import numpy as np
+#MARK:Flask 서버 시작 설정
 # 플라스크 서버 지정
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False #for utf8
@@ -52,22 +54,22 @@ template_dir = os.path.abspath(os.path.dirname(__file__))  # 현재 파일의 �
 # html에 파라미터를 주기위해 jinja2 라이브러리 사용
 env = Environment(loader=FileSystemLoader(template_dir))
 template = env.get_template('jsp/tooltipList.html')
+#MARK: MYSQL 서버 설정
 
+#MARK: 폴리움 맵 마커 DB SELECT
 # 지도에 마커를 표시하기 위한 데이터베이스 진입
 @app.route("/select")
 def select():
-    # MySql Connection
+        # MySql Connection
     conn = pymysql.connect(
-        host='127.0.0.1',
-        user='root',
-        password='qwer1234',
-        db='sealevel',
-        charset='utf8'
-    )
-
-    # Connection으로부터 Cursor 생성
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+        # Connection으로부터 Cursor 생성
     curs = conn.cursor()
-
     # sql 문장
     sql = "select * from mappoint"
     curs.execute(sql)
@@ -78,6 +80,7 @@ def select():
 
     return result
 
+#MARK: 해수면 예측값 회귀모델 전송
 # 선형회귀모델 예측값 보내기
 @app.route('/getpred')
 def sea():
@@ -100,16 +103,26 @@ def sea():
 
     pre_int = list(map(int, pre))
     return {'result' : pre_int}
-
+#MARK: 서버 테스트
 # 서버 테스트용
 @app.route("/test")
 def iris2():
 
     return '<h1>테스트 서버</h1><br><h2>테스트 서버</h2>'
-
+#MARK: 폴리움 지도 설정
 # 지도 보여주기
 @app.route("/showmap",methods=['GET','POST'])
 def mapview():
+            # MySql Connection
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+        # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
     
     # 대한민국 지도
     korea_map = folium.Map(
@@ -164,22 +177,22 @@ def mapview():
 
     return korea_map.get_root().render()
 
+#MARK: 지도 마커 클릭시 값 보내기
 @app.route("/goSwiftfile",methods=['GET','POST'])
 def goswift():
 
-    name = request.args.get('name')
-
-    # MySql Connection
+        # MySql Connection
     conn = pymysql.connect(
-        host='127.0.0.1',
-        user='root',
-        password='qwer1234',
-        db='sealevel',
-        charset='utf8'
-    )
-
-    # Connection으로부터 Cursor 생성
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+        # Connection으로부터 Cursor 생성
     curs = conn.cursor()
+
+    name = request.args.get('name')
 
     # sql 문장
     sql = "select * from mappoint where landname=%s"
@@ -191,24 +204,19 @@ def goswift():
 
     return {"result" : name}
 
-
-    return {"result" : rows}
-
-    # return json.dumps(rows, ensure_ascii=False).encode('utf8')
-
-
+#MARK: 네이버 뉴스 크롤링,DB INSERT
 @app.route("/getnews")
 def startup():
 
+            # MySql Connection
     conn = pymysql.connect(
-        host='127.0.0.1',
-        user='root',
-        password='qwer1234',
-        db='sealevel',
-        charset='utf8'
-    )
-    print("스타트스탙트")
-    # Connection으로부터 Cursor 생성
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+        # Connection으로부터 Cursor 생성
     curs = conn.cursor()
 
     # 전에있던 리스트 삭제
@@ -217,6 +225,7 @@ def startup():
     conn.commit()
 
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get("https://news.naver.com/breakingnews/section/103/248")
     title = []
@@ -236,29 +245,36 @@ def startup():
             publish.append(newspublish.text)
             image.append( newsimage.get_attribute('src'))
             link.append(newslink.get_attribute('href'))
+            time.sleep(0.3)
+        data_list = []
         for j in range(4):
             # sql 문장
             sql = "insert into navernews (title,publish,image,link) values (%s,%s,%s,%s)"
             curs.execute(sql,(title[j],publish[j],image[j],link[j]))
             conn.commit()
 
-        conn.close()
-        curs.close()
+            data_dict = {
+            'title': title[j],
+            'publish': publish[j],
+            'image': image[j],
+            'link': link[j]
+            }
+            data_list.append(data_dict)
+        
     except Exception as e:
         print(f"에러 발생: {e}")
         if 'conn' in locals():
             conn.rollback()  # 롤백 수행
             conn.close()
             curs.close()
-    return "ok"
+    
+    return json.dumps(data_list, ensure_ascii=False).encode('utf8')
 
+#MARK: 유튜브 크롤링,DB INSERT
 @app.route("/getyou")
 def goyou():
-    chrome_options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    driver.get("https://www.youtube.com/results?search_query=해수면")
 
-
+        # MySql Connection
     conn = pymysql.connect(
             host='127.0.0.1',
             user='root',
@@ -266,9 +282,13 @@ def goyou():
             db='sealevel',
             charset='utf8'
         )
-
-    # Connection으로부터 Cursor 생성
+        # Connection으로부터 Cursor 생성
     curs = conn.cursor()
+
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver.get("https://www.youtube.com/results?search_query=해수면")
 
     # 전에있던 리스트 삭제
     sql = "delete from youtubevidio"
@@ -282,31 +302,152 @@ def goyou():
         for i in range(1,5):
             if i == 4:
                 driver.execute_script("window.scrollBy(0, 600);")
-                time.sleep(1)  
+                time.sleep(0.5)  
 
             video_renderer = driver.find_element(By.XPATH, f"(//ytd-video-renderer)[{i}]")
             yes = video_renderer.find_element(By.CSS_SELECTOR, "a#thumbnail yt-image img")
             no = video_renderer.find_element(By.CSS_SELECTOR, "a#thumbnail")
             youimage.append(yes.get_attribute('src'))
             youlink.append(no.get_attribute('href'))
+
+        data_list2 = []
         for n in range(4):
             # sql 문장
             print("넣을 이미지 이름" ,youimage[n])
             sql = "insert into youtubevidio (link,image) values (%s,%s)"
             curs.execute(sql,(youlink[n],youimage[n]))
-                    
-            conn.commit()
 
-        curs.close()
-        conn.close()
+            conn.commit()
+            #res = curs.fetchall()
+            
+            data_dict = {
+            'link': youlink[n],
+            'image': youimage[n]}
+
+            data_list2.append(data_dict)
+
     except Exception as e:
         print(f"에러 발생: {e}")
-        if 'conn' in locals():
-            conn.rollback()  # 롤백 수행
-            conn.close()
-            curs.close()
-    driver.quit()
-    return " ok"
+    finally:
+        curs.close()
+        conn.close()
+        driver.quit()
+
+    return json.dumps(data_list2, ensure_ascii=False).encode('utf8')
+
+@app.route("/swiftnews")
+def asdf():
+
+        # MySql Connection
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+        # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    sql = "select * from navernews"
+    curs.execute(sql)
+    rows = curs.fetchall()
+    conn.close()
+    dlist = []
+    for row in rows[:4]: 
+        data_dict = {
+        "title": row[0],
+        "publish": row[1],
+        "image": row[2],
+        "link": row[3]
+        }
+        dlist.append(data_dict)
+
+    result = json.dumps(dlist, ensure_ascii=False).encode('utf8')
+
+    return result
+
+@app.route("/swiftyou")
+def fd():
+
+            # MySql Connection
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+        # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    sql = "select * from youtubevidio"
+    curs.execute(sql)
+    rows = curs.fetchall()
+    conn.close()
+    dlist = []
+
+    for link, image in rows[:4]:
+        data_dict = {
+            "link": link,
+            "image": image
+        }
+        dlist.append(data_dict)
+
+    # 최종 결과 JSON 변환
+    result = json.dumps(dlist, ensure_ascii=False).encode('utf8')
+
+    return result
+
+    
+@app.route("/inDataFrame")
+def godata():
+
+    engine = create_engine("mysql+pymysql://root:qwer1234@127.0.0.1:3306/sealevel")
+
+    
+    data_frame = pd.read_csv("Data/file/data_finalver.csv")
+    data_frame.to_sql(name='chartdata', con=engine, if_exists='append', index=False)
+
+    return "okok"
+
+@app.route("/getDataFrame")
+def getsum():
+    # MySql Connection
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+    
+    # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    sql = "select * from chartdata"
+    curs.execute(sql)
+    rows = curs.fetchall()
+    conn.close()
+    dlist = []
+
+    for row in rows: 
+        data_dict = {
+        "Year": row[0],
+        "sealevel": row[1],
+        "co2": row[2],
+        "Population" : row[3],
+        "Thickness": row[4],
+        "북극해빙면적평균": row[5],
+        "해상평균온도": row[6],
+        "지구평균온도": row[7]
+        }
+        dlist.append(data_dict)
+
+    # 최종 결과 JSON 변환
+    result = json.dumps(dlist, ensure_ascii=False).encode('utf8')
+
+    return result
 
 
 if __name__ == "__main__":

@@ -13,6 +13,13 @@
 		1AA9CD982C1846C400A9879D /* MapMarkerQueryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */; };
 		1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F79C1712C1963B900BF1A2E /* mapview.swift */; };
 		1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */; };
+		1FB641BB2C1FD25A001F6440 /* python_toswiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641BA2C1FD25A001F6440 /* python_toswiftModel.swift */; };
+		1FB641BE2C1FD298001F6440 /* python_getJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641BD2C1FD298001F6440 /* python_getJSON.swift */; };
+		1FB641C12C1FD2CA001F6440 /* splashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641C02C1FD2CA001F6440 /* splashView.swift */; };
+		1FB641C42C1FD300001F6440 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1FB641C32C1FD300001F6440 /* SDWebImageSwiftUI */; };
+		1FB641C72C1FD32B001F6440 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 1FB641C62C1FD32B001F6440 /* DGCharts */; };
+		1FB641C92C1FD36E001F6440 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641C82C1FD36E001F6440 /* MainView.swift */; };
+		1FB641CB2C1FD393001F6440 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641CA2C1FD393001F6440 /* Detail.swift */; };
 		D83A9DCD2C1ABEE0003E7898 /* SeaLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */; };
 		D83A9DCF2C1AC040003E7898 /* SeaLevelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */; };
 		D83A9DD12C1AC0BB003E7898 /* SeaLevelShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */; };
@@ -36,6 +43,11 @@
 		1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerQueryDB.swift; sourceTree = "<group>"; };
 		1F79C1712C1963B900BF1A2E /* mapview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapview.swift; sourceTree = "<group>"; };
 		1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
+		1FB641BA2C1FD25A001F6440 /* python_toswiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = python_toswiftModel.swift; sourceTree = "<group>"; };
+		1FB641BD2C1FD298001F6440 /* python_getJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = python_getJSON.swift; sourceTree = "<group>"; };
+		1FB641C02C1FD2CA001F6440 /* splashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashView.swift; sourceTree = "<group>"; };
+		1FB641C82C1FD36E001F6440 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1FB641CA2C1FD393001F6440 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelModel.swift; sourceTree = "<group>"; };
 		D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelContentView.swift; sourceTree = "<group>"; };
 		D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelShapeView.swift; sourceTree = "<group>"; };
@@ -58,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FB641C72C1FD32B001F6440 /* DGCharts in Frameworks */,
+				1FB641C42C1FD300001F6440 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +88,8 @@
 		1AA9CD8F2C1845F600A9879D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1F79C1702C19639E00BF1A2E /* mapview_python */,
+				1FB641BF2C1FD2B6001F6440 /* Splash */,
+				1F79C1702C19639E00BF1A2E /* python_View */,
 				1AA9CD932C18463C00A9879D /* MapMarker.swift */,
 				EB983DFC2C1B348B00ED8822 /* SeaLevelControllView.swift */,
 				D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */,
@@ -90,6 +105,7 @@
 		1AA9CD902C1845FE00A9879D /* VM */ = {
 			isa = PBXGroup;
 			children = (
+				1FB641BC2C1FD277001F6440 /* python_server */,
 				1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */,
 				EB983E032C1B423300ED8822 /* GetLandMarkJSON.swift */,
 			);
@@ -107,20 +123,39 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1F79C1702C19639E00BF1A2E /* mapview_python */ = {
+		1F79C1702C19639E00BF1A2E /* python_View */ = {
 			isa = PBXGroup;
 			children = (
 				1F79C1712C1963B900BF1A2E /* mapview.swift */,
+				1FB641C82C1FD36E001F6440 /* MainView.swift */,
+				1FB641CA2C1FD393001F6440 /* Detail.swift */,
 			);
-			path = mapview_python;
+			path = python_View;
 			sourceTree = "<group>";
 		};
 		1FA69B9C2C1A812E005E4ED0 /* python_server */ = {
 			isa = PBXGroup;
 			children = (
 				1FA69B9E2C1A815C005E4ED0 /* ServerModel.swift */,
+				1FB641BA2C1FD25A001F6440 /* python_toswiftModel.swift */,
 			);
 			path = python_server;
+			sourceTree = "<group>";
+		};
+		1FB641BC2C1FD277001F6440 /* python_server */ = {
+			isa = PBXGroup;
+			children = (
+				1FB641BD2C1FD298001F6440 /* python_getJSON.swift */,
+			);
+			path = python_server;
+			sourceTree = "<group>";
+		};
+		1FB641BF2C1FD2B6001F6440 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				1FB641C02C1FD2CA001F6440 /* splashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		D85EF1E62C180EC800F80776 = {
@@ -188,6 +223,8 @@
 			);
 			name = seaLevelProject;
 			packageProductDependencies = (
+				1FB641C32C1FD300001F6440 /* SDWebImageSwiftUI */,
+				1FB641C62C1FD32B001F6440 /* DGCharts */,
 			);
 			productName = seaLevelProject;
 			productReference = D85EF1EF2C180EC800F80776 /* seaLevelProject.app */;
@@ -218,6 +255,8 @@
 			);
 			mainGroup = D85EF1E62C180EC800F80776;
 			packageReferences = (
+				1FB641C22C1FD300001F6440 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				1FB641C52C1FD32B001F6440 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = D85EF1F02C180EC800F80776 /* Products */;
 			projectDirPath = "";
@@ -247,17 +286,22 @@
 			files = (
 				EB983E062C1B427800ED8822 /* python_to_swift.swift in Sources */,
 				D83A9DCF2C1AC040003E7898 /* SeaLevelContentView.swift in Sources */,
+				1FB641CB2C1FD393001F6440 /* Detail.swift in Sources */,
 				D83A9DCD2C1ABEE0003E7898 /* SeaLevelModel.swift in Sources */,
+				1FB641C12C1FD2CA001F6440 /* splashView.swift in Sources */,
 				EB983E082C1B429800ED8822 /* SealevelView.swift in Sources */,
 				1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */,
 				1A71C33F2C1BE65200571537 /* MapPerv.swift in Sources */,
+				1FB641C92C1FD36E001F6440 /* MainView.swift in Sources */,
 				D83A9DD32C1AC104003E7898 /* YAxisView.swift in Sources */,
 				EB983E022C1B41DC00ED8822 /* FeatureDataService.swift in Sources */,
 				D83A9DD12C1AC0BB003E7898 /* SeaLevelShapeView.swift in Sources */,
+				1FB641BB2C1FD25A001F6440 /* python_toswiftModel.swift in Sources */,
 				1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */,
 				EB983DFD2C1B348B00ED8822 /* SeaLevelControllView.swift in Sources */,
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				EB983DFF2C1B41C200ED8822 /* FeatureDataModel.swift in Sources */,
+				1FB641BE2C1FD298001F6440 /* python_getJSON.swift in Sources */,
 				D85EF1F32C180EC800F80776 /* seaLevelProjectApp.swift in Sources */,
 				1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */,
 				EB983E042C1B423300ED8822 /* GetLandMarkJSON.swift in Sources */,
@@ -470,6 +514,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1FB641C22C1FD300001F6440 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.4;
+			};
+		};
+		1FB641C52C1FD32B001F6440 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1FB641C32C1FD300001F6440 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FB641C22C1FD300001F6440 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		1FB641C62C1FD32B001F6440 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FB641C52C1FD32B001F6440 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D85EF1E72C180EC800F80776 /* Project object */;
 }
