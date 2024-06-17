@@ -14,5 +14,4 @@ struct MapPoint: Codable {
     var longitude: String
     var level: String
     var height: String
-    
 }

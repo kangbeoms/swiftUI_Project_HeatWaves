@@ -14,6 +14,7 @@ import json
 import joblib
 # sql 접근
 import pymysql
+from sqlalchemy import create_engine
 # 파이썬 맵 사용
 import folium
 # json파일 불러오기
@@ -399,6 +400,56 @@ def fd():
     return result
 
     
+@app.route("/inDataFrame")
+def godata():
+
+    engine = create_engine("mysql+pymysql://root:qwer1234@127.0.0.1:3306/sealevel")
+
+    
+    data_frame = pd.read_csv("Data/file/data_finalver.csv")
+    data_frame.to_sql(name='chartdata', con=engine, if_exists='append', index=False)
+
+    return "okok"
+
+@app.route("/getDataFrame")
+def getsum():
+    # MySql Connection
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+    
+    # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    sql = "select * from chartdata"
+    curs.execute(sql)
+    rows = curs.fetchall()
+    conn.close()
+    dlist = []
+
+    for row in rows: 
+        data_dict = {
+        "Year": row[0],
+        "sealevel": row[1],
+        "co2": row[2],
+        "Population" : row[3],
+        "Thickness": row[4],
+        "북극해빙면적평균": row[5],
+        "해상평균온도": row[6],
+        "지구평균온도": row[7]
+        }
+        dlist.append(data_dict)
+
+    # 최종 결과 JSON 변환
+    result = json.dumps(dlist, ensure_ascii=False).encode('utf8')
+
+    return result
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)
 
