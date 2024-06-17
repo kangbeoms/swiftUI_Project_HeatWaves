@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct SeaLevelControllView: View {    
+struct SeaLevelControllView: View {
 //    @EnvironmentObject private var vm: FeaturesViewModel
-    @State private var seaLevel: CGFloat = 0 // 해수면 높이 초기값
-    @State private var co2Val: CGFloat = 0.0
-    @State private var popVal: CGFloat = 0.0
-    @State private var thicVal: CGFloat = 0.0
-    @State private var thicMeanVal: CGFloat = 0.0
-    @State private var seaMeanTempVal: CGFloat = 0.0
-    @State private var seaSurMeanTempVal: CGFloat = 0.0
-    @State private var earthTempMeanVal: CGFloat = 0.0
+    @State var seaLevel: CGFloat = 0 // 해수면 높이 초기값
+    @State var co2Val: CGFloat = 0.0
+    @State var popVal: CGFloat = 0.0
+    @State var thicVal: CGFloat = 0.0
+    @State var thicMeanVal: CGFloat = 0.0
+    @State var seaMeanTempVal: CGFloat = 0.0
+    @State var seaSurMeanTempVal: CGFloat = 0.0
+    @State var earthTempMeanVal: CGFloat = 0.0
     
     var body: some View {
         VStack (spacing: 16){
@@ -85,7 +85,7 @@ extension SeaLevelControllView {
     }//controlLabelSection
     
     private var tfAmount: some View{
-        TextField(0, text: String($co2Val))
+        TextField("co2:", text: binding(for: $co2Val))
             .textFieldStyle(.roundedBorder)
             .frame(width: 50)
             .multilineTextAlignment(.trailing)
@@ -121,4 +121,18 @@ extension SeaLevelControllView {
                 .cornerRadius(25)
         }
     }//leftButtonSection
+    
+    
+    private func binding(for value: Binding<CGFloat>) -> Binding<String> {
+        Binding<String>(
+            get: {
+                String(format: "%.2f", value.wrappedValue)
+            },
+            set: {
+                if let doubleValue = Double($0) {
+                    value.wrappedValue = CGFloat(doubleValue)
+                }
+            }
+        )
+    }
 }

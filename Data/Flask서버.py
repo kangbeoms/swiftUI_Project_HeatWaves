@@ -4,6 +4,7 @@
 설명: 1.database에 있는 랜드마크 이름,위도,경도,해발고도,건물 높이를 불러온다.
      2.제작한 선형회귀모델을 사용 get요청으로 예측값을 보낸다.
 """
+
 # 파이썬 서버 구동
 from flask import Flask, jsonify, render_template, request,current_app
 # json으로 데이터 송신
@@ -26,6 +27,21 @@ from folium.plugins import FloatImage
 
 # html 파일 실행
 from jinja2 import Environment, FileSystemLoader
+
+# 데이터프레임 생성
+import pandas as pd
+
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from bs4 import BeautifulSoup
+from selenium.webdriver.common.action_chains import ActionChains
+
+import urllib.request as req
+# 크롤링 시 시간 텀 주기
+import time
 
 # 플라스크 서버 지정
 app = Flask(__name__)
@@ -75,9 +91,9 @@ def sea():
     datalist.append(float(request.args.get("해상평균온도")))
     datalist.append(float(request.args.get("지구평균온도")))
 
-    inputdata = [datalist]
+    inputdata = [datalist]  
     # 스케일된 train_input 과 모델을 불러옴
-    scale, clf = joblib.load(f"{current_app.root_path}/model_with_scaler.sea")
+    scale, clf = joblib.load(f"{current_app.root_path}/선형회귀모델/model_with_scaler.sea")
 
     scaled_data = scale.transform(inputdata)
     pre = clf.predict(scaled_data)
@@ -88,7 +104,7 @@ def sea():
 # 서버 테스트용
 @app.route("/test")
 def iris2():
-    #print(os.getcwd())
+
     return '<h1>테스트 서버</h1><br><h2>테스트 서버</h2>'
 
 # 지도 보여주기
@@ -101,7 +117,7 @@ def mapview():
     zoom_start= 7,
     
     )
-    #korea_map.fit_bounds([[33, 124.0], [38.6, 131.9]])
+
     korea_map.zoom_start = 7
     savedata = json.loads(select())
 
@@ -120,7 +136,7 @@ def mapview():
         folium.Marker(
             [i[1],i[2]],
             popup=html_content,
-            tooltip=i[0],
+            #tooltip=i[0],
             fill=True,
             lazy=True,
             ).add_to(korea_map)
@@ -143,10 +159,8 @@ def mapview():
         style_function=style_function
     ).add_to(korea_map)
 
-
     # 모바일 환경과 맞지않아 사용안함
     MousePosition().add_to(korea_map)
-
 
     return korea_map.get_root().render()
 
@@ -170,15 +184,130 @@ def goswift():
     # sql 문장
     sql = "select * from mappoint where landname=%s"
     curs.execute(sql,(name))
-    rows = curs.fetchall()
-    conn.close()
+    curs.fetchall()
 
-    # response = jsonify({'result': name})
-    # response.headers.add('Content-Type', 'application/json; charset=utf-8')
+    conn.close()
+    curs.close()
+
+    return {"result" : name}
+
 
     return {"result" : rows}
 
     # return json.dumps(rows, ensure_ascii=False).encode('utf8')
+
+
+@app.route("/getnews")
+def startup():
+
+    conn = pymysql.connect(
+        host='127.0.0.1',
+        user='root',
+        password='qwer1234',
+        db='sealevel',
+        charset='utf8'
+    )
+    print("스타트스탙트")
+    # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    # 전에있던 리스트 삭제
+    sql = "delete from navernews"
+    curs.execute(sql)
+    conn.commit()
+
+    chrome_options = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver.get("https://news.naver.com/breakingnews/section/103/248")
+    title = []
+    publish = []
+    link = []
+    image = []
+
+    try:
+        for num in range(1,5):
+
+            newstitle = driver.find_element(By.XPATH, f'//*[@id="newsct"]/div[2]/div/div[1]/div[1]/ul/li[{num}]/div/div/div[2]/a/strong') 
+            newspublish = driver.find_element(By.XPATH, f'//*[@id="newsct"]/div[2]/div/div[1]/div[1]/ul/li[{num}]/div/div/div[2]/div[2]/div[1]/div[1]') 
+            newsimage = driver.find_element(By.XPATH, f'//*[@id="newsct"]/div[2]/div/div[1]/div[1]/ul/li[{num}]/div/div/div[1]/div/a/img') 
+            newslink = driver.find_element(By.XPATH, f'//*[@id="newsct"]/div[2]/div/div[1]/div[1]/ul/li[{num}]/div/div/div[1]/div/a') 
+                
+            title.append(newstitle.text)
+            publish.append(newspublish.text)
+            image.append( newsimage.get_attribute('src'))
+            link.append(newslink.get_attribute('href'))
+        for j in range(4):
+            # sql 문장
+            sql = "insert into navernews (title,publish,image,link) values (%s,%s,%s,%s)"
+            curs.execute(sql,(title[j],publish[j],image[j],link[j]))
+            conn.commit()
+
+        conn.close()
+        curs.close()
+    except Exception as e:
+        print(f"에러 발생: {e}")
+        if 'conn' in locals():
+            conn.rollback()  # 롤백 수행
+            conn.close()
+            curs.close()
+    return "ok"
+
+@app.route("/getyou")
+def goyou():
+    chrome_options = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver.get("https://www.youtube.com/results?search_query=해수면")
+
+
+    conn = pymysql.connect(
+            host='127.0.0.1',
+            user='root',
+            password='qwer1234',
+            db='sealevel',
+            charset='utf8'
+        )
+
+    # Connection으로부터 Cursor 생성
+    curs = conn.cursor()
+
+    # 전에있던 리스트 삭제
+    sql = "delete from youtubevidio"
+    curs.execute(sql)
+    conn.commit()
+
+    youlink = []
+    youimage = []
+
+    try:
+        for i in range(1,5):
+            if i == 4:
+                driver.execute_script("window.scrollBy(0, 600);")
+                time.sleep(1)  
+
+            video_renderer = driver.find_element(By.XPATH, f"(//ytd-video-renderer)[{i}]")
+            yes = video_renderer.find_element(By.CSS_SELECTOR, "a#thumbnail yt-image img")
+            no = video_renderer.find_element(By.CSS_SELECTOR, "a#thumbnail")
+            youimage.append(yes.get_attribute('src'))
+            youlink.append(no.get_attribute('href'))
+        for n in range(4):
+            # sql 문장
+            print("넣을 이미지 이름" ,youimage[n])
+            sql = "insert into youtubevidio (link,image) values (%s,%s)"
+            curs.execute(sql,(youlink[n],youimage[n]))
+                    
+            conn.commit()
+
+        curs.close()
+        conn.close()
+    except Exception as e:
+        print(f"에러 발생: {e}")
+        if 'conn' in locals():
+            conn.rollback()  # 롤백 수행
+            conn.close()
+            curs.close()
+    driver.quit()
+    return " ok"
+
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000, debug=True)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooltip</title>
+    <title>메인 지도</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,15 +35,46 @@
             font-size: 14px;
             color: #555;
         }
+
     </style>
+
 </head>
 <body>
-    <form action="/goSwiftfile" method="get" class="tooltip-content">
+    <form class="tooltip-content">
         <h2>{{ name }}</h2>
         <img src="http://127.0.0.1:5000/static/images/{{imagepath}}.jpg"/> 
         <div><p>높이: {{ height }} m</p></div>
-        <input type="submit" value="해수면 예측하기"/>
+        <input type="submit" value="해수면 예측하기" id="gogogo"/>
         <input type="hidden" name="name" value="{{ name }}">
     </form>
+
+    <!-- <script>
+        $("#gogogo").click(function() {
+        document.querySelector('input[name="name"]').value;
+    
+        })
+    </script> -->
+    <!-- document.querySelector("#gogogo")
+    //*[@id="gogogo"] -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#gogogo").click(function() {
+    $.ajax({
+        url: '/goSwiftfile',
+        type: 'GET',
+        data: {
+            name: '63빌딩'  // 예시로 이름을 전달
+        },
+        success: function(response) {
+            console.log('서버에서 받은 데이터:', response);
+
+        },
+        error: function(error) {
+            console.error('서버 요청 실패:', error);
+        }
+    });
+    })
+    </script> -->
+
 </body>
 </html>
