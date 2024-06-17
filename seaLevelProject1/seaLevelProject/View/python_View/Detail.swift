@@ -28,6 +28,24 @@ struct Detail: View {
                         .font(.body)
                         .foregroundColor(.gray)
                     
+                    // 예측해보기 버튼
+                    HStack(spacing: 15){
+                        NavigationLink(destination: SeaLevelPredictionView()) {
+                            Text("숫자로 해수면 예측")
+                                .padding(8)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                         NavigationLink(destination: AdjustableSeaLevelView()){
+                            Text("버튼으로 해수면 예측")
+                                .padding(8)
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                    }
+
                     // 레전드 추가
                     HStack {
                         Circle()
