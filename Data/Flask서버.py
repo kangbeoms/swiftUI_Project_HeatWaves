@@ -8,7 +8,7 @@
 """
 #MARK:import 모음
 # 파이썬 서버 구동
-from flask import Flask, jsonify, render_template, request,current_app
+from flask import Flask, jsonify, render_template, render_template_string, request,current_app
 # json으로 데이터 송신
 import json
 import joblib
@@ -138,25 +138,6 @@ def mapview():
     korea_map.zoom_start = 7
     savedata = json.loads(select())
 
-    my_js = """
-    $(document).ready(function() {
-        $('#gogogo').click(function() {
-           var input = document.getElementById('name');
-            alert('버튼이 클릭되었습니다.',input);
-            
-        });
-    });  
-"""
-    getitem = JsCode("""$(document).ready(function() {
-        $('#gogogo').click(function() {
-           var input = document.getElementById('name');
-            alert('버튼이 클릭되었습니다.',input);
-            
-        });
-    }); """)
-   
-    
-  
     #korea_map.get_root().html.add_child(folium.JavascriptLink(f'/{current_app.root_path}/jsp/func.js'))
     # html파일 읽어오기
     file_path = os.path.abspath(f"{current_app.root_path}/jsp/tooltipList.html")
@@ -168,7 +149,6 @@ def mapview():
         folium.IFrame(html=html_content, width=3500, height=500).add_to(korea_map)
         # html파일에 파라미터를 부여해 정보 보이기
         html_content = template.render(name= i[0], height= i[3],imagepath=i[0])
-
         # 미리 지정한 위치에 마커를 표시하고 클릭 시 html파일로 이동
         folium.Marker(
             [i[1],i[2]],
@@ -178,7 +158,6 @@ def mapview():
             lazy=True,
             ).add_to(korea_map)
     
-    #marker.popup.add_child(getitem)
 
     # GeoJSON 파일 열기
     with open(f"{current_app.root_path}/json/korea_map.json", "r") as f:
@@ -200,8 +179,10 @@ def mapview():
 
     # 모바일 환경과 맞지않아 사용안함
     MousePosition().add_to(korea_map)
-    korea_map.get_root().script.add_child(Element(my_js))
+
     return korea_map.get_root().render()
+
+#korea_map.get_root().render()
 #korea_map._repr_html_()korea_map.get_root().render()
 
 #MARK: 지도 마커 클릭시 값 보내기
