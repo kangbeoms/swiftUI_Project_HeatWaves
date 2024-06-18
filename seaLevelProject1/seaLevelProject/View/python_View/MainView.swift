@@ -54,9 +54,12 @@ struct SituationView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    
+                        NavigationLink(destination: mapview(), label: {
+                            Text("지도보기")
+                        })
                     // 관련 영상 섹션
                     VStack {
+                    
                         Section(header: Text("관련 영상").bold()) {
                             LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                                 ForEach(vidio, id: \.link) { video in

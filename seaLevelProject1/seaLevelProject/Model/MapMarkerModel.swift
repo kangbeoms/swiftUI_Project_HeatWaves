@@ -28,7 +28,6 @@ struct MapMarkerModel: Decodable{
     
 }
 
-
 extension MapMarkerModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
