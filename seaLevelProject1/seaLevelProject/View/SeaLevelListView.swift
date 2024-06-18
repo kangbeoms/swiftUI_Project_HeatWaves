@@ -1,13 +1,7 @@
-//
-//  SeaLevelListView.swift
-//  seaLevelProject
-//
-//  Created by 김수진 on 6/18/24.
-//
 import SwiftUI
 
 struct SeaLevelListView: View {
-    @ObservedObject var viewModel = SeaLevelViewModel()
+    @StateObject var viewModel = SeaLevelViewModel()
     
     var body: some View {
         VStack {
@@ -18,24 +12,35 @@ struct SeaLevelListView: View {
                     }
             } else {
                 List {
-                    ForEach(viewModel.seaLevelData) { item in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(item.label)
-                                    .font(.headline)
-                                Text("\(item.value, specifier: "%.2f")")
-                                    .font(.subheadline)
-                            }
-                            Spacer()
-                            Text(item.unit)
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.vertical, 8)
+                    ForEach($viewModel.seaLevelData) { $item in
+                        SeaLevelItemView(item: $item)
                     }
                 }
             }
         }
+    }
+}
+
+struct SeaLevelItemView: View {
+    @Binding var item: SeaLevelControllerModel
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(item.label)
+                        .font(.headline)
+                    Text(item.unit)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                Stepper(value: $item.value, in: item.minValue...item.maxValue, step: 1) {
+                    Text("\(item.value, specifier: "%.2f")")
+                        .font(.subheadline)
+                }
+            }
+        }
+        .padding(.vertical, 8)
     }
 }
 

@@ -26,6 +26,7 @@
 		D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EF1F42C180EC800F80776 /* ContentView.swift */; };
 		D85EF1F72C180ECB00F80776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F62C180ECB00F80776 /* Assets.xcassets */; };
 		D85EF1FA2C180ECB00F80776 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */; };
+		EB28EB332C21E1820013408C /* SeaLevelControllerJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28EB322C21E1820013408C /* SeaLevelControllerJSON.swift */; };
 		EB983DFD2C1B348B00ED8822 /* SeaLevelControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB983DFC2C1B348B00ED8822 /* SeaLevelControllView.swift */; };
 		EBF133FB2C20B384007175FC /* SeaLevelControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FA2C20B384007175FC /* SeaLevelControllerModel.swift */; };
 		EBF133FF2C20B3FF007175FC /* SeaLevelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */; };
@@ -51,6 +52,7 @@
 		D85EF1F42C180EC800F80776 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D85EF1F62C180ECB00F80776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D85EF1F92C180ECB00F80776 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EB28EB322C21E1820013408C /* SeaLevelControllerJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaLevelControllerJSON.swift; sourceTree = "<group>"; };
 		EB983DFC2C1B348B00ED8822 /* SeaLevelControllView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaLevelControllView.swift; sourceTree = "<group>"; };
 		EBF133FA2C20B384007175FC /* SeaLevelControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelControllerModel.swift; sourceTree = "<group>"; };
 		EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelListView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				1FB641BC2C1FD277001F6440 /* python_server */,
 				1AA9CD972C1846C400A9879D /* MapMarkerQueryDB.swift */,
 				EBF134002C20B56C007175FC /* SeaLevelViewModel.swift */,
+				EB28EB322C21E1820013408C /* SeaLevelControllerJSON.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				D83A9DCF2C1AC040003E7898 /* SeaLevelContentView.swift in Sources */,
 				EBF133FB2C20B384007175FC /* SeaLevelControllerModel.swift in Sources */,
+				EB28EB332C21E1820013408C /* SeaLevelControllerJSON.swift in Sources */,
 				1FB641CB2C1FD393001F6440 /* Detail.swift in Sources */,
 				1FB641C12C1FD2CA001F6440 /* splashView.swift in Sources */,
 				1AA9CD962C1846A100A9879D /* MapMarkerModel.swift in Sources */,
