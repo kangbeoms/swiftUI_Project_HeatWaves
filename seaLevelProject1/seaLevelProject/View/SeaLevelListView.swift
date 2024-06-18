@@ -35,7 +35,8 @@ struct SeaLevelItemView: View {
                         .foregroundColor(.gray)
                 }
                 Stepper(value: $item.value, in: item.minValue...item.maxValue, step: 1) {
-                    Text("\(item.value, specifier: "%.2f")")
+//                    Text("\(item.value, specifier: "%.2f")")
+                    Text("\(Int(item.value))")  // 정수 형태로 값을 표시
                         .font(.subheadline)
                 }
             }

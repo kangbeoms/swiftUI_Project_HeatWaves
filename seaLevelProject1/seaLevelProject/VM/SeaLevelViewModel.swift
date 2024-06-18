@@ -34,7 +34,7 @@ class SeaLevelViewModel: ObservableObject {
         }
         
         let minValues: [Double] = [2019, 0, 0, 0, 0, 0, 0]
-        let maxValues: [Double] = [2100, 100, 50000, 100, 100, 100, 100]
+        let maxValues: [Double] = [2100, 100000, 100, 100, 100, 100, 100]
         
         var data = [SeaLevelControllerModel]()
         
