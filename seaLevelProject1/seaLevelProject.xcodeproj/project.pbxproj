@@ -19,6 +19,10 @@
 		1FB641C72C1FD32B001F6440 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 1FB641C62C1FD32B001F6440 /* DGCharts */; };
 		1FB641C92C1FD36E001F6440 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641C82C1FD36E001F6440 /* MainView.swift */; };
 		1FB641CB2C1FD393001F6440 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB641CA2C1FD393001F6440 /* Detail.swift */; };
+		D80BAB452C204C7700008D51 /* SeaLevelPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BAB442C204C7700008D51 /* SeaLevelPredictionView.swift */; };
+		D80BAB472C204D0E00008D51 /* SeaLevel5Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BAB462C204D0D00008D51 /* SeaLevel5Model.swift */; };
+		D80BAB492C204DD200008D51 /* SeaLevelShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BAB482C204DD200008D51 /* SeaLevelShape.swift */; };
+		D80BAB4B2C20805E00008D51 /* AdjustableSeaLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BAB4A2C20805E00008D51 /* AdjustableSeaLevelView.swift */; };
 		D83A9DCD2C1ABEE0003E7898 /* SeaLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */; };
 		D83A9DCF2C1AC040003E7898 /* SeaLevelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */; };
 		D83A9DD12C1AC0BB003E7898 /* SeaLevelShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */; };
@@ -46,6 +50,10 @@
 		1FB641C02C1FD2CA001F6440 /* splashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashView.swift; sourceTree = "<group>"; };
 		1FB641C82C1FD36E001F6440 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1FB641CA2C1FD393001F6440 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		D80BAB442C204C7700008D51 /* SeaLevelPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelPredictionView.swift; sourceTree = "<group>"; };
+		D80BAB462C204D0D00008D51 /* SeaLevel5Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevel5Model.swift; sourceTree = "<group>"; };
+		D80BAB482C204DD200008D51 /* SeaLevelShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelShape.swift; sourceTree = "<group>"; };
+		D80BAB4A2C20805E00008D51 /* AdjustableSeaLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableSeaLevelView.swift; sourceTree = "<group>"; };
 		D83A9DCC2C1ABEE0003E7898 /* SeaLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelModel.swift; sourceTree = "<group>"; };
 		D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelContentView.swift; sourceTree = "<group>"; };
 		D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelShapeView.swift; sourceTree = "<group>"; };
@@ -89,12 +97,16 @@
 				1FB641BF2C1FD2B6001F6440 /* Splash */,
 				1F79C1702C19639E00BF1A2E /* python_View */,
 				1AA9CD932C18463C00A9879D /* MapMarker.swift */,
+				D80BAB442C204C7700008D51 /* SeaLevelPredictionView.swift */,
 				EB983DFC2C1B348B00ED8822 /* SeaLevelControllView.swift */,
 				D83A9DCE2C1AC040003E7898 /* SeaLevelContentView.swift */,
 				D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */,
 				D83A9DD22C1AC104003E7898 /* YAxisView.swift */,
 				EB983E072C1B429800ED8822 /* SealevelView.swift */,
 				EB983E052C1B427800ED8822 /* python_to_swift.swift */,
+				D80BAB462C204D0D00008D51 /* SeaLevel5Model.swift */,
+				D80BAB482C204DD200008D51 /* SeaLevelShape.swift */,
+				D80BAB4A2C20805E00008D51 /* AdjustableSeaLevelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,9 +303,13 @@
 				1FB641C92C1FD36E001F6440 /* MainView.swift in Sources */,
 				D83A9DD32C1AC104003E7898 /* YAxisView.swift in Sources */,
 				EB983E022C1B41DC00ED8822 /* FeatureDataService.swift in Sources */,
+				D80BAB4B2C20805E00008D51 /* AdjustableSeaLevelView.swift in Sources */,
 				D83A9DD12C1AC0BB003E7898 /* SeaLevelShapeView.swift in Sources */,
 				1FB641BB2C1FD25A001F6440 /* python_toswiftModel.swift in Sources */,
+				D80BAB492C204DD200008D51 /* SeaLevelShape.swift in Sources */,
 				1FA69B9F2C1A815C005E4ED0 /* ServerModel.swift in Sources */,
+				D80BAB452C204C7700008D51 /* SeaLevelPredictionView.swift in Sources */,
+				D80BAB472C204D0E00008D51 /* SeaLevel5Model.swift in Sources */,
 				EB983DFD2C1B348B00ED8822 /* SeaLevelControllView.swift in Sources */,
 				D85EF1F52C180EC800F80776 /* ContentView.swift in Sources */,
 				EB983DFF2C1B41C200ED8822 /* FeatureDataModel.swift in Sources */,
