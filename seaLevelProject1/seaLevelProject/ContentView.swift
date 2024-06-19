@@ -11,7 +11,8 @@ struct ContentView: View {
     
     var body: some View {
 //        MainView()
-        SeaLevelListView()
+//        SeaLevelListView()
+        SeaLevelChartView(landmark: .constant(LandMarkListModel(name: "롯데타워", sealevel: "14", height: "555")))
 //        TabView {
 //            SeaLevelPredictionView()
 //                .tabItem {
