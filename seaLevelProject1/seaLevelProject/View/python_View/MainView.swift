@@ -29,11 +29,13 @@ struct MainView: View {
                     .tabItem {
                         Label("지도", systemImage: "map.fill")
                     }
+                NavigationView{ // Detail 페이지에 버튼추가 위해
+                    Detail()
+                }
+                        .tabItem {
+                            Label("상세 정보", systemImage: "info.circle")
+                        }
                 
-                Detail()
-                    .tabItem {
-                        Label("상세 정보", systemImage: "info.circle")
-                    }
             }
             .onAppear {
                 let queryModel = QueryModel()

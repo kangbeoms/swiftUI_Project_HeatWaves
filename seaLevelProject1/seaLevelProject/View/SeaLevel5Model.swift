@@ -1,6 +1,6 @@
 //
 //  SeaLevel5Model.swift
-//  SeaLevel9
+//  seaLevelProject
 //
 //  Created by 기태우 on 6/17/24.
 //
@@ -47,6 +47,7 @@ class SeaLevel5Model: ObservableObject {
         }.resume()
     }
 }
+
 
 
 
