@@ -12,6 +12,7 @@ struct SeaLevelControllerModel: Identifiable {
     var label: String
     var unit: String
     var value: Double
+    var step: Double
     var minValue: Double
     var maxValue: Double
 }

@@ -13,7 +13,7 @@ struct SeaLevelListView: View {
             } else {
                 List {
                     ForEach($viewModel.seaLevelData) { $item in
-                        SeaLevelItemView(item: $item)
+                        SeaLevelItemView(item: $item, viewModel: viewModel)
                     }
                 }
             }
@@ -23,6 +23,7 @@ struct SeaLevelListView: View {
 
 struct SeaLevelItemView: View {
     @Binding var item: SeaLevelControllerModel
+    @ObservedObject var viewModel: SeaLevelViewModel
     
     var body: some View {
         HStack {
@@ -34,10 +35,21 @@ struct SeaLevelItemView: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
-                Stepper(value: $item.value, in: item.minValue...item.maxValue, step: 1) {
-//                    Text("\(item.value, specifier: "%.2f")")
+                Stepper(value: $item.value, in: item.minValue...item.maxValue, step: item.step) {
                     Text("\(Int(item.value))")  // 정수 형태로 값을 표시
                         .font(.subheadline)
+                }
+                .onChange(of: item.value) { newValue in
+                    // 각 값을 업데이트하고 fetchSeaLevelValue 호출
+                    viewModel.fetchSeaLevelValue(
+                        year: 2023,
+                        co2: viewModel.seaLevelData[1].value,
+                        population: viewModel.seaLevelData[2].value,
+                        thickness: viewModel.seaLevelData[3].value,
+                        area: viewModel.seaLevelData[4].value,
+                        seaTemp: viewModel.seaLevelData[5].value,
+                        globalTemp: viewModel.seaLevelData[6].value
+                    )
                 }
             }
         }

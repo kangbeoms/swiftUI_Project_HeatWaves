@@ -1,38 +1,33 @@
 import SwiftUI
 
 struct SeaLevelChartView: View {
-    
-    @Binding var landmark: LandMarkListModel // 선택된 랜드마크
+    @Binding var landmark: LandMarkListModel
+    @ObservedObject var viewModel: SeaLevelViewModel
     
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                if let seaLevelValue = stringToCGFloat(landmark.sealevel) {
-                    ZStack(alignment: .bottom) { // 아래에서 시작하도록 설정
-                        // y축 눈금 표시
-                        SeaLevelChartYAxisView()
-                            .frame(height: 500)
-                        
-                        // 해수면
-                        SeaLevelChartShapeView(seaLevel: seaLevelValue)
-                            .fill(Color.blue.opacity(0.5))
-                            .frame(maxWidth: .infinity, alignment: .bottom)
-                        
-                        // 집 아이콘
-                        Image("house_icon")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 150, height: 150) // 아이콘의 크기를 조정
-//                            .offset(y: -seaLevelValue)  집 아이콘을 해수면 위로 배치
-                    }
-                    .frame(width: 300, height: 500) // 기본값을 설정
-                    .background(Color.red)
-                    .padding(6)
-                    .id("bottom") // 태그 지정
-                } else {
-                    Text("Invalid data")
-                        .foregroundColor(.red)
+                ZStack(alignment: .bottom) { // 아래에서 시작하도록 설정
+                    // y축 눈금 표시
+                    SeaLevelChartYAxisView()
+                        .frame(height: 500)
+                    
+                    // 해수면
+                    SeaLevelChartShapeView(seaLevel: viewModel.seaLevelValue)
+                        .fill(Color.blue.opacity(0.5))
+                        .frame(maxWidth: .infinity, alignment: .bottom)
+                    
+                    // 집 아이콘
+                    Image("house_icon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150) // 아이콘의 크기를 조정
+//                        .offset(y: -viewModel.seaLevelValue * 10) // 집 아이콘을 해수면 위로 배치
                 }
+                .frame(width: 300, height: 500) // 기본값을 설정
+//                .background(Color.red)
+                .padding(6)
+                .id("bottom") // 태그 지정
             }
             .padding()
             .onAppear {
@@ -52,6 +47,6 @@ struct SeaLevelChartView: View {
 
 struct SeaLevelChartView_Previews: PreviewProvider {
     static var previews: some View {
-        SeaLevelChartView(landmark: .constant(LandMarkListModel(name: "롯데타워", sealevel: "14", height: "555")))
+        SeaLevelChartView(landmark: .constant(LandMarkListModel(name: "롯데타워", sealevel: "14", height: "555")), viewModel: SeaLevelViewModel())
     }
 }

@@ -3,7 +3,8 @@ import Combine
 
 class SeaLevelViewModel: ObservableObject {
     @Published var seaLevelData: [SeaLevelControllerModel] = []
-
+    @Published var seaLevelValue: CGFloat = 0.0
+    
     func fetchData() {
         // 비동기적으로 데이터를 로드합니다.
         Task {
@@ -32,7 +33,7 @@ class SeaLevelViewModel: ObservableObject {
         guard values.count == labels.count else {
             throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "데이터 변환 오류"])
         }
-        
+        let steps: [Double] =  [1, 100, 1, 1, 1, 1, 1]
         let minValues: [Double] = [2019, 0, 0, 0, 0, 0, 0]
         let maxValues: [Double] = [2100, 100000, 100, 100, 100, 100, 100]
         
@@ -43,6 +44,7 @@ class SeaLevelViewModel: ObservableObject {
                 label: labels[i],
                 unit: units[i],
                 value: values[i],
+                step: steps[i],
                 minValue: minValues[i],
                 maxValue: maxValues[i]
             )
@@ -50,5 +52,23 @@ class SeaLevelViewModel: ObservableObject {
         }
         
         return data
+    }
+    
+    func fetchSeaLevelValue(year: Int, co2: Double, population: Double, thickness: Double, area: Double, seaTemp: Double, globalTemp: Double) {
+        guard let url = URL(string: "http://127.0.0.1:5000/getpred?Year=\(year)&co2=\(co2)&Population=\(population)&Thickness=\(thickness)&북극해빙면적평균=\(area)&해상평균온도=\(seaTemp)&지구평균온도=\(globalTemp)") else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    if let result = try JSONDecoder().decode([String: [Double]].self, from: data)["result"]?.first {
+                        DispatchQueue.main.async {
+                            self.seaLevelValue = CGFloat(result)
+                        }
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        }.resume()
     }
 }

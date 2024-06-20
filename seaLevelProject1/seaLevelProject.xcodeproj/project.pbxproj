@@ -30,9 +30,11 @@
 		EB28EB372C21EF970013408C /* LandMarkListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28EB362C21EF970013408C /* LandMarkListModel.swift */; };
 		EB28EB392C225C360013408C /* SeaLevelChartShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28EB382C225C360013408C /* SeaLevelChartShapeView.swift */; };
 		EB28EB3B2C225C760013408C /* SeaLevelChartYAxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28EB3A2C225C760013408C /* SeaLevelChartYAxisView.swift */; };
+		EBA6A5B82C24250E00DCB760 /* SeaLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA6A5B72C24250E00DCB760 /* SeaLevelView.swift */; };
 		EBF133FB2C20B384007175FC /* SeaLevelControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FA2C20B384007175FC /* SeaLevelControllerModel.swift */; };
 		EBF133FF2C20B3FF007175FC /* SeaLevelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */; };
 		EBF134012C20B56C007175FC /* SeaLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF134002C20B56C007175FC /* SeaLevelViewModel.swift */; };
+		EBFB7B672C241FD400EA82F1 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = EBFB7B662C241FD400EA82F1 /* DGChartsDynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,7 @@
 		EB28EB362C21EF970013408C /* LandMarkListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandMarkListModel.swift; sourceTree = "<group>"; };
 		EB28EB382C225C360013408C /* SeaLevelChartShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelChartShapeView.swift; sourceTree = "<group>"; };
 		EB28EB3A2C225C760013408C /* SeaLevelChartYAxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelChartYAxisView.swift; sourceTree = "<group>"; };
+		EBA6A5B72C24250E00DCB760 /* SeaLevelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaLevelView.swift; sourceTree = "<group>"; };
 		EBF133FA2C20B384007175FC /* SeaLevelControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelControllerModel.swift; sourceTree = "<group>"; };
 		EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelListView.swift; sourceTree = "<group>"; };
 		EBF134002C20B56C007175FC /* SeaLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelViewModel.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FB641C72C1FD32B001F6440 /* DGCharts in Frameworks */,
+				EBFB7B672C241FD400EA82F1 /* DGChartsDynamic in Frameworks */,
 				1FB641C42C1FD300001F6440 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +88,7 @@
 				1AA9CD932C18463C00A9879D /* MapMarker.swift */,
 				D83A9DD02C1AC0BB003E7898 /* SeaLevelShapeView.swift */,
 				D83A9DD22C1AC104003E7898 /* YAxisView.swift */,
+				EBA6A5B72C24250E00DCB760 /* SeaLevelView.swift */,
 				EBF133FE2C20B3FF007175FC /* SeaLevelListView.swift */,
 				EB28EB342C21EE6E0013408C /* SeaLevelChartView.swift */,
 				EB28EB382C225C360013408C /* SeaLevelChartShapeView.swift */,
@@ -206,6 +211,7 @@
 			packageProductDependencies = (
 				1FB641C32C1FD300001F6440 /* SDWebImageSwiftUI */,
 				1FB641C62C1FD32B001F6440 /* DGCharts */,
+				EBFB7B662C241FD400EA82F1 /* DGChartsDynamic */,
 			);
 			productName = seaLevelProject;
 			productReference = D85EF1EF2C180EC800F80776 /* seaLevelProject.app */;
@@ -285,6 +291,7 @@
 				EBF134012C20B56C007175FC /* SeaLevelViewModel.swift in Sources */,
 				1F79C1722C1963B900BF1A2E /* mapview.swift in Sources */,
 				1AA9CD982C1846C400A9879D /* MapMarkerQueryDB.swift in Sources */,
+				EBA6A5B82C24250E00DCB760 /* SeaLevelView.swift in Sources */,
 				EB28EB392C225C360013408C /* SeaLevelChartShapeView.swift in Sources */,
 				1AA9CD942C18463C00A9879D /* MapMarker.swift in Sources */,
 			);
@@ -524,6 +531,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FB641C52C1FD32B001F6440 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		EBFB7B662C241FD400EA82F1 /* DGChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FB641C52C1FD32B001F6440 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGChartsDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
