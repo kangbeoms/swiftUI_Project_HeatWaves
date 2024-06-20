@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  HeatWavesBySoo
+//  SeaLevelController
 //
-//  Created by 김수진 on 6/13/24.
+//  Created by 김수진 on 6/17/24.
 //
 
 import SwiftUI
