@@ -8,7 +8,7 @@
 """
 #MARK:import 모음
 # 파이썬 서버 구동
-from flask import Flask, jsonify, render_template, request,current_app
+from flask import Flask, jsonify, render_template, render_template_string, request,current_app
 # json으로 데이터 송신
 import json
 import joblib
@@ -48,10 +48,17 @@ import numpy as np
 from folium.elements import *
 from folium.utilities import JsCode
 from folium.plugins import Realtime
+
+
 #MARK:Flask 서버 시작 설정
 # 플라스크 서버 지정
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False #for utf8
+from flask import Flask, render_template, request
+from flask_socketio import SocketIO, emit
+
+
+socketio = SocketIO(app)
 
 template_dir = os.path.abspath(os.path.dirname(__file__))  # 현재 파일의 절대 경로
 
@@ -61,6 +68,8 @@ template = env.get_template('jsp/tooltipList.html')
 #MARK: MYSQL 서버 설정
 
 #MARK: 폴리움 맵 마커 DB SELECT
+global_name = None
+
 # 지도에 마커를 표시하기 위한 데이터베이스 진입
 @app.route("/select")
 def select():
@@ -132,31 +141,12 @@ def mapview():
     korea_map = folium.Map(
     location=[36, 127.7],
     zoom_start= 7,
-    
+
     )
 
     korea_map.zoom_start = 7
     savedata = json.loads(select())
 
-    my_js = """
-    $(document).ready(function() {
-        $('#gogogo').click(function() {
-           var input = document.getElementById('name');
-            alert('버튼이 클릭되었습니다.',input);
-            
-        });
-    });  
-"""
-    getitem = JsCode("""$(document).ready(function() {
-        $('#gogogo').click(function() {
-           var input = document.getElementById('name');
-            alert('버튼이 클릭되었습니다.',input);
-            
-        });
-    }); """)
-   
-    
-  
     #korea_map.get_root().html.add_child(folium.JavascriptLink(f'/{current_app.root_path}/jsp/func.js'))
     # html파일 읽어오기
     file_path = os.path.abspath(f"{current_app.root_path}/jsp/tooltipList.html")
@@ -168,7 +158,6 @@ def mapview():
         folium.IFrame(html=html_content, width=3500, height=500).add_to(korea_map)
         # html파일에 파라미터를 부여해 정보 보이기
         html_content = template.render(name= i[0], height= i[3],imagepath=i[0])
-
         # 미리 지정한 위치에 마커를 표시하고 클릭 시 html파일로 이동
         folium.Marker(
             [i[1],i[2]],
@@ -178,7 +167,6 @@ def mapview():
             lazy=True,
             ).add_to(korea_map)
     
-    #marker.popup.add_child(getitem)
 
     # GeoJSON 파일 열기
     with open(f"{current_app.root_path}/json/korea_map.json", "r") as f:
@@ -200,36 +188,19 @@ def mapview():
 
     # 모바일 환경과 맞지않아 사용안함
     MousePosition().add_to(korea_map)
-    korea_map.get_root().script.add_child(Element(my_js))
+
     return korea_map.get_root().render()
+
+#korea_map.get_root().render()
 #korea_map._repr_html_()korea_map.get_root().render()
 
 #MARK: 지도 마커 클릭시 값 보내기
-@app.route("/goSwiftfile",methods=['GET','POST'])
+@app.route("/getData",methods=['GET','POST'])
 def goswift():
-
-        # MySql Connection
-    conn = pymysql.connect(
-            host='127.0.0.1',
-            user='root',
-            password='qwer1234',
-            db='sealevel',
-            charset='utf8'
-        )
-        # Connection으로부터 Cursor 생성
-    curs = conn.cursor()
-
+    global global_name
     name = request.args.get('name')
-
-    # sql 문장
-    sql = "select * from mappoint where landname=%s"
-    curs.execute(sql,(name))
-    curs.fetchall()
-
-    conn.close()
-    curs.close()
-
-    return {"result" : name}
+    global_name = name
+    return "ok"
 
 #MARK: 네이버 뉴스 크롤링,DB INSERT
 @app.route("/getnews")
@@ -432,7 +403,6 @@ def godata():
 
     engine = create_engine("mysql+pymysql://root:qwer1234@127.0.0.1:3306/sealevel")
 
-    
     data_frame = pd.read_csv("Data/file/data_finalver.csv")
     data_frame.to_sql(name='chartdata', con=engine, if_exists='append', index=False)
 
@@ -477,6 +447,16 @@ def getsum():
     return result
 
 
+@socketio.on('message')
+def handle_message():
+    # HTML에서 전송된 변수를 받아 처리합니다.
+
+    # 변수를 수정하여 다시 전송합니다.
+    modified_variable = global_name 
+    print("데이터",modified_variable)
+    emit('message', {'data': modified_variable})
+
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1",port=5000, debug=True)
+    socketio.run(app,host="127.0.0.1",port=5000, debug=True)
 

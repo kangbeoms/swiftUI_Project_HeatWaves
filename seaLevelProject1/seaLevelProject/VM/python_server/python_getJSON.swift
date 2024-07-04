@@ -23,5 +23,11 @@ struct QueryModel {
       
         return try JSONDecoder().decode([DataFrame].self, from: data)
     }
+    
+    func loadData4(url: URL) async throws -> [GetData]{
+        let (data, _) = try await URLSession.shared.data(from: url)
+      
+        return try JSONDecoder().decode([GetData].self, from: data)
+    }
 }
 

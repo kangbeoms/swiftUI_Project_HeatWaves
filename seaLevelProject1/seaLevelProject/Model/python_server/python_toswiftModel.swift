@@ -32,6 +32,10 @@ struct DataFrame: Decodable{
     var 지구평균온도: String
 }
 
+struct GetData: Decodable{
+    var name: String
+}
+
 
 
 extension Savedata: Hashable{
@@ -52,3 +56,8 @@ extension DataFrame: Hashable{
     }
 }
 
+extension GetData: Hashable{
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}
